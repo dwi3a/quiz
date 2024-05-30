@@ -462,4 +462,14 @@ function start(){
 document.querySelector(".homepage").style.display = "none";
 document.querySelector(".choosetopic").style.display = "flex";
 }
+// Function to reset the quiz
+function resetQuiz() {
+  currentquestion = 0;
+  score = 0;
+  document.querySelector(".resultdiv").style.display = "none";
+  document.querySelector(".choosetopic").style.display = "flex";
+}
 
+// Event listener for the Try Again button
+let tryagainbutton = document.querySelector(".tryagainbutton");
+tryagainbutton.addEventListener("click", resetQuiz);
