@@ -1,3 +1,5 @@
+// Define arrays containing quiz data for different topics
+// array of general knowledge quiz objects
 let generaldata=[
     {
       question: "Who was the first person to step onto the surface of the Moon?",
@@ -51,7 +53,7 @@ let generaldata=[
     }
   
   ];
-
+//array of nature quiz objects
 let naturedata=[
     {
       question: "Which layer of the Earth's atmosphere is closest to the surface?",
@@ -105,6 +107,7 @@ let naturedata=[
     }
   
   ];
+  //array of capitals quiz objects
   let capitalsdata=[
     {
       question: "What is the capital city of Australia?",
@@ -158,6 +161,7 @@ let naturedata=[
     }
   
   ];
+  //array of sports quiz objects
   let sportsdata=[
     {
       question: "What is the national sport of Canada?",
@@ -211,6 +215,7 @@ let naturedata=[
     }
   
   ];
+// Get buttons for each topic and add event listeners to them
   let generalbutton = document.querySelector(".topic1button");
   generalbutton.addEventListener("click", generalknowledge);
 
@@ -223,40 +228,47 @@ let naturedata=[
   let sportsbutton=document.querySelector(".topic4button");
   sportsbutton.addEventListener("click", sports);
 
-
+// Get elements for displaying questions, choices, and results
   let questioncontent=document.getElementById('question')
   let choicecontent = document.getElementById('choices')
   let resultcontent = document.getElementById('result')
-
+// Initialize variables for tracking current question and score
   let currentquestion = 0
   let score = 0
-  
+  // Function to start the general knowledge quiz
   function generalknowledge(){
+    // Hide the topic selection and display the quiz container
     document.querySelector(".choosetopic").style.display = "none";
     document.querySelector(".quiz-container").style.display = "flex";
-
+// Function to display current question and choices
   function  displayquestion() {
+    // Get current quiz data
       let currentquizdata= generaldata[currentquestion];
+      // Display question
       questioncontent.textContent =currentquizdata.question;
       choicecontent.innerHTML = '';
-    currentquizdata.choices.forEach(choice => {
-      let button = document.createElement('button');
-      button.textContent = choice;
-      button.classList.add('choice');
-      button.addEventListener('click', checkAnswer);
-      choicecontent.appendChild(button);
-      choicecontent.appendChild(document.createElement('br'));
-    });
+      // Display choices as buttons
+      for (let i = 0; i < currentquizdata.choices.length; i++) {
+        let choice = currentquizdata.choices[i];
+        let button = document.createElement('button');
+        button.textContent = choice;
+        button.classList.add('choice');
+        button.addEventListener('click', checkAnswer);
+        choicecontent.appendChild(button);
+        choicecontent.appendChild(document.createElement('br'));
+      }
   }
-  
+  // Function to check the selected answer
   function checkAnswer(event){
       let selectedchoice = event.target.textContent;
     let currentquizdata = generaldata[currentquestion];
+    // Increase score if answer is correct
     if (selectedchoice == currentquizdata.correctAnswer) {
       score++;
    
     }
     currentquestion++;
+    // Display next question or result if all questions are answered
     if (currentquestion < generaldata.length) {
       displayquestion();
     } else {
@@ -265,10 +277,11 @@ let naturedata=[
     }
   }
 
-  
+  // Function to display quiz result
   function showResult() {
     questioncontent.textContent = '';
     choicecontent.textContent = '';
+    // Display result message based on score
   if (score === generaldata.length) {
       resultcontent.textContent = `Congratulations! You got all the answers right! Your score: ${score}/${generaldata.length}`;
     } else {
@@ -283,24 +296,28 @@ document.querySelector('.resultdiv').style.display = "flex";
 document.querySelector('.quiz-container').style.display = "none";
 
 }
-
+// Similar functions for nature, capitals, and sports quizzes
 
 function nature(){
   document.querySelector(".choosetopic").style.display = "none";
     document.querySelector(".quiz-container").style.display = "flex";
-  function  displayquestion() {
-      let currentquizdata= naturedata[currentquestion];
-      questioncontent.textContent =currentquizdata.question;
-      choicecontent.innerHTML = '';
-    currentquizdata.choices.forEach(choice => {
-      let button = document.createElement('button');
-      button.textContent = choice;
-      button.classList.add('choice');
-      button.addEventListener('click', checkAnswer);
-      choicecontent.appendChild(button);
-      choicecontent.appendChild(document.createElement('br'));
-    });
-  }
+    function  displayquestion() {
+      // Get current quiz data
+        let currentquizdata= naturedata[currentquestion];
+        // Display question
+        questioncontent.textContent =currentquizdata.question;
+        choicecontent.innerHTML = '';
+        // Display choices as buttons
+        for (let i = 0; i < currentquizdata.choices.length; i++) {
+          let choice = currentquizdata.choices[i];
+          let button = document.createElement('button');
+          button.textContent = choice;
+          button.classList.add('choice');
+          button.addEventListener('click', checkAnswer);
+          choicecontent.appendChild(button);
+          choicecontent.appendChild(document.createElement('br'));
+        }
+    }
   
   function checkAnswer(event){
       let selectedchoice = event.target.textContent;
@@ -336,19 +353,23 @@ function nature(){
 function capitals(){
   document.querySelector(".choosetopic").style.display = "none";
     document.querySelector(".quiz-container").style.display = "flex";
-  function  displayquestion() {
-      let currentquizdata= capitalsdata[currentquestion];
-      questioncontent.textContent =currentquizdata.question;
-      choicecontent.innerHTML = '';
-    currentquizdata.choices.forEach(choice => {
-      let button = document.createElement('button');
-      button.textContent = choice;
-      button.classList.add('choice');
-      button.addEventListener('click', checkAnswer);
-      choicecontent.appendChild(button);
-      choicecontent.appendChild(document.createElement('br'));
-    });
-  }
+    function  displayquestion() {
+      // Get current quiz data
+        let currentquizdata= capitalsdata[currentquestion];
+        // Display question
+        questioncontent.textContent =currentquizdata.question;
+        choicecontent.innerHTML = '';
+        // Display choices as buttons
+        for (let i = 0; i < currentquizdata.choices.length; i++) {
+          let choice = currentquizdata.choices[i];
+          let button = document.createElement('button');
+          button.textContent = choice;
+          button.classList.add('choice');
+          button.addEventListener('click', checkAnswer);
+          choicecontent.appendChild(button);
+          choicecontent.appendChild(document.createElement('br'));
+        }
+    }
   
   function checkAnswer(event){
       let selectedchoice = event.target.textContent;
@@ -383,19 +404,23 @@ function capitals(){
 function sports(){
   document.querySelector(".choosetopic").style.display = "none";
     document.querySelector(".quiz-container").style.display = "flex";
-  function  displayquestion() {
-      let currentquizdata= sportsdata[currentquestion];
-      questioncontent.textContent =currentquizdata.question;
-      choicecontent.innerHTML = '';
-    currentquizdata.choices.forEach(choice => {
-      let button = document.createElement('button');
-      button.textContent = choice;
-      button.classList.add('choice');
-      button.addEventListener('click', checkAnswer);
-      choicecontent.appendChild(button);
-      choicecontent.appendChild(document.createElement('br'));
-    });
-  }
+    function  displayquestion() {
+      // Get current quiz data
+        let currentquizdata= sportsdata[currentquestion];
+        // Display question
+        questioncontent.textContent =currentquizdata.question;
+        choicecontent.innerHTML = '';
+        // Display choices as buttons
+        for (let i = 0; i < currentquizdata.choices.length; i++) {
+          let choice = currentquizdata.choices[i];
+          let button = document.createElement('button');
+          button.textContent = choice;
+          button.classList.add('choice');
+          button.addEventListener('click', checkAnswer);
+          choicecontent.appendChild(button);
+          choicecontent.appendChild(document.createElement('br'));
+        }
+    }
   
   function checkAnswer(event){
       let selectedchoice = event.target.textContent;
@@ -428,11 +453,12 @@ function sports(){
 }
 
 
-
+// Event listener for start button 
 let startbutton=document.querySelector('.startbutton')
   startbutton.addEventListener("click", start);
-
+   // Function to start the quiz application
 function start(){
+    // Hide homepage and display topic selection
 document.querySelector(".homepage").style.display = "none";
 document.querySelector(".choosetopic").style.display = "flex";
 }
