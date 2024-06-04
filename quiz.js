@@ -229,11 +229,11 @@ let naturedata=[
   sportsbutton.addEventListener("click", sports);
 
 // Get elements for displaying questions, choices, and results
-  let questioncontent=document.getElementById('question')
-  let choicecontent = document.getElementById('choices')
-  let resultcontent = document.getElementById('result')
+  let questionplaceholder=document.getElementById('question')
+  let choiceplaceholder = document.getElementById('choices')
+  let resultplaceholder = document.getElementById('result')
 // Initialize variables for tracking current question and score
-  let currentquestion = 0
+  let question = 0
   let score = 0
   // Function to start the general knowledge quiz
   function generalknowledge(){
@@ -243,33 +243,42 @@ let naturedata=[
 // Function to display current question and choices
   function  displayquestion() {
     // Get current quiz data
-      let currentquizdata= generaldata[currentquestion];
-      // Display question
-      questioncontent.textContent =currentquizdata.question;
-      choicecontent.innerHTML = '';
-      // Display choices as buttons
-      for (let i = 0; i < currentquizdata.choices.length; i++) {
-        let choice = currentquizdata.choices[i];
+      let currenttopic= generaldata[question];
+      // Display the question text
+      questionplaceholder.textContent =currenttopic.question;
+      // Clear the previous choices
+      choiceplaceholder.innerHTML = '';
+      // Loop through each choice available for the current question
+      for (let i = 0; i < currenttopic.choices.length; i++) {
+        // Get the current choice text
+        let choice = currenttopic.choices[i];
+        // Create a button element for the choice
         let button = document.createElement('button');
+        // Set the text of the button to the choice text
         button.textContent = choice;
+        // Add a CSS class to the button for styling
         button.classList.add('choice');
+        // Add an event listener to the button
         button.addEventListener('click', checkAnswer);
-        choicecontent.appendChild(button);
-        choicecontent.appendChild(document.createElement('br'));
+        // Add the button to the choices container
+        choiceplaceholder.appendChild(button);
+        // Add a line break after each button
+        choiceplaceholder.appendChild(document.createElement('br'));
       }
   }
   // Function to check the selected answer
   function checkAnswer(event){
+    // Get the text content of the clicked button
       let selectedchoice = event.target.textContent;
-    let currentquizdata = generaldata[currentquestion];
+    let currenttopic = generaldata[question];
     // Increase score if answer is correct
-    if (selectedchoice == currentquizdata.correctAnswer) {
+    if (selectedchoice == currenttopic.correctAnswer) {
       score++;
    
     }
-    currentquestion++;
+    question++;
     // Display next question or result if all questions are answered
-    if (currentquestion < generaldata.length) {
+    if (question < generaldata.length) {
       displayquestion();
     } else {
       showResult();
@@ -279,13 +288,13 @@ let naturedata=[
 
   // Function to display quiz result
   function showResult() {
-    questioncontent.textContent = '';
-    choicecontent.textContent = '';
+    questionplaceholder.textContent = '';
+    choiceplaceholder.textContent = '';
     // Display result message based on score
   if (score === generaldata.length) {
-      resultcontent.textContent = `Congratulations! You got all the answers right! Your score: ${score}/${generaldata.length}`;
+      resultplaceholder.textContent = `Congratulations! You got all the answers right! Your score: ${score}/${generaldata.length}`;
     } else {
-      resultcontent.textContent = `Great effort! Keep trying to improve your score! Your score: ${score}/${generaldata.length}`;
+      resultplaceholder.textContent = `Great effort! Keep trying to improve your score! Your score: ${score}/${generaldata.length}`;
     }
   }
   
@@ -303,31 +312,31 @@ function nature(){
     document.querySelector(".quiz-container").style.display = "flex";
     function  displayquestion() {
       // Get current quiz data
-        let currentquizdata= naturedata[currentquestion];
+        let currenttopic= naturedata[question];
         // Display question
-        questioncontent.textContent =currentquizdata.question;
-        choicecontent.innerHTML = '';
+        questionplaceholder.textContent =currenttopic.question;
+        choiceplaceholder.innerHTML = '';
         // Display choices as buttons
-        for (let i = 0; i < currentquizdata.choices.length; i++) {
-          let choice = currentquizdata.choices[i];
+        for (let i = 0; i < currenttopic.choices.length; i++) {
+          let choice = currenttopic.choices[i];
           let button = document.createElement('button');
           button.textContent = choice;
           button.classList.add('choice');
           button.addEventListener('click', checkAnswer);
-          choicecontent.appendChild(button);
-          choicecontent.appendChild(document.createElement('br'));
+          choiceplaceholder.appendChild(button);
+          choiceplaceholder.appendChild(document.createElement('br'));
         }
     }
   
   function checkAnswer(event){
       let selectedchoice = event.target.textContent;
-    let currentquizdata = naturedata[currentquestion];
-    if (selectedchoice == currentquizdata.correctAnswer) {
+    let currenttopic = naturedata[question];
+    if (selectedchoice == currenttopic.correctAnswer) {
       score++;
    
     }
-    currentquestion++;
-    if (currentquestion < naturedata.length) {
+    question++;
+    if (question < naturedata.length) {
       displayquestion();
     } else {
   
@@ -337,12 +346,12 @@ function nature(){
   }
   
   function showResult() {
-    questioncontent.textContent = '';
-    choicecontent.textContent = '';
+    questionplaceholder.textContent = '';
+    choiceplaceholder.textContent = '';
   if (score === naturedata.length) {
-      resultcontent.textContent = `Congratulations! You got all the answers right! Your score: ${score}/${naturedata.length}`;
+      resultplaceholder.textContent = `Congratulations! You got all the answers right! Your score: ${score}/${naturedata.length}`;
     } else {
-      resultcontent.textContent = `Great effort! Keep trying to improve your score! Your score: ${score}/${naturedata.length}`;
+      resultplaceholder.textContent = `Great effort! Keep trying to improve your score! Your score: ${score}/${naturedata.length}`;
     }
   }
   
@@ -355,31 +364,31 @@ function capitals(){
     document.querySelector(".quiz-container").style.display = "flex";
     function  displayquestion() {
       // Get current quiz data
-        let currentquizdata= capitalsdata[currentquestion];
+        let currenttopic= capitalsdata[question];
         // Display question
-        questioncontent.textContent =currentquizdata.question;
-        choicecontent.innerHTML = '';
+        questionplaceholder.textContent =currenttopic.question;
+        choiceplaceholder.innerHTML = '';
         // Display choices as buttons
-        for (let i = 0; i < currentquizdata.choices.length; i++) {
-          let choice = currentquizdata.choices[i];
+        for (let i = 0; i < currenttopic.choices.length; i++) {
+          let choice = currenttopic.choices[i];
           let button = document.createElement('button');
           button.textContent = choice;
           button.classList.add('choice');
           button.addEventListener('click', checkAnswer);
-          choicecontent.appendChild(button);
-          choicecontent.appendChild(document.createElement('br'));
+          choiceplaceholder.appendChild(button);
+          choiceplaceholder.appendChild(document.createElement('br'));
         }
     }
   
   function checkAnswer(event){
       let selectedchoice = event.target.textContent;
-    let currentquizdata = capitalsdata[currentquestion];
-    if (selectedchoice == currentquizdata.correctAnswer) {
+    let currenttopic = capitalsdata[question];
+    if (selectedchoice == currenttopic.correctAnswer) {
       score++;
    
     }
-    currentquestion++;
-    if (currentquestion < capitalsdata.length) {
+    question++;
+    if (question < capitalsdata.length) {
       displayquestion();
     } else {
   
@@ -389,12 +398,12 @@ function capitals(){
   }
   
   function showResult() {
-    questioncontent.textContent = '';
-    choicecontent.textContent = '';
+    questionplaceholder.textContent = '';
+    choiceplaceholder.textContent = '';
   if (score === capitalsdata.length) {
-      resultcontent.textContent = `Congratulations! You got all the answers right! Your score: ${score}/${capitalsdata.length}`;
+      resultplaceholder.textContent = `Congratulations! You got all the answers right! Your score: ${score}/${capitalsdata.length}`;
     } else {
-      resultcontent.textContent = `Great effort! Keep trying to improve your score! Your score: ${score}/${capitalsdata.length}`;
+      resultplaceholder.textContent = `Great effort! Keep trying to improve your score! Your score: ${score}/${capitalsdata.length}`;
     }
   }
   
@@ -406,31 +415,31 @@ function sports(){
     document.querySelector(".quiz-container").style.display = "flex";
     function  displayquestion() {
       // Get current quiz data
-        let currentquizdata= sportsdata[currentquestion];
+        let currenttopic= sportsdata[question];
         // Display question
-        questioncontent.textContent =currentquizdata.question;
-        choicecontent.innerHTML = '';
+        questionplaceholder.textContent =currenttopic.question;
+        choiceplaceholder.innerHTML = '';
         // Display choices as buttons
-        for (let i = 0; i < currentquizdata.choices.length; i++) {
-          let choice = currentquizdata.choices[i];
+        for (let i = 0; i < currenttopic.choices.length; i++) {
+          let choice = currenttopic.choices[i];
           let button = document.createElement('button');
           button.textContent = choice;
           button.classList.add('choice');
           button.addEventListener('click', checkAnswer);
-          choicecontent.appendChild(button);
-          choicecontent.appendChild(document.createElement('br'));
+          choiceplaceholder.appendChild(button);
+          choiceplaceholder.appendChild(document.createElement('br'));
         }
     }
   
   function checkAnswer(event){
       let selectedchoice = event.target.textContent;
-    let currentquizdata = sportsdata[currentquestion];
-    if (selectedchoice == currentquizdata.correctAnswer) {
+    let currenttopic = sportsdata[question];
+    if (selectedchoice == currenttopic.correctAnswer) {
       score++;
    
     }
-    currentquestion++;
-    if (currentquestion < sportsdata.length) {
+    question++;
+    if (question < sportsdata.length) {
       displayquestion();
     } else {
   
@@ -440,12 +449,12 @@ function sports(){
   }
   
   function showResult() {
-    questioncontent.textContent = '';
-    choicecontent.textContent = '';
+    questionplaceholder.textContent = '';
+    choiceplaceholder.textContent = '';
   if (score === sportsdata.length) {
-      resultcontent.textContent = `Congratulations! You got all the answers right! Your score: ${score}/${sportsdata.length}`;
+      resultplaceholder.textContent = `Congratulations! You got all the answers right! Your score: ${score}/${sportsdata.length}`;
     } else {
-      resultcontent.textContent = `Great effort! Keep trying to improve your score! Your score: ${score}/${sportsdata.length}`;
+      resultplaceholder.textContent = `Great effort! Keep trying to improve your score! Your score: ${score}/${sportsdata.length}`;
     }
   }
   
@@ -462,9 +471,10 @@ function start(){
 document.querySelector(".homepage").style.display = "none";
 document.querySelector(".choosetopic").style.display = "flex";
 }
+
 // Function to reset the quiz
 function resetQuiz() {
-  currentquestion = 0;
+  question = 0;
   score = 0;
   document.querySelector(".resultdiv").style.display = "none";
   document.querySelector(".choosetopic").style.display = "flex";
